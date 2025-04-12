@@ -1,62 +1,84 @@
-import Dashboard from "layouts/dashboard";
-import Tables from "layouts/tables";
-import Category from "layouts/categoryTable";
-import Billing from "layouts/billing";
-import Notifications from "layouts/notifications";
-import Profile from "layouts/profile";
-import SignIn from "layouts/authentication/sign-in";
+import Index from "components/Index";
+import Profile from "components/Profile";
+import Login from "components/Login";
+import Category from "components/Categories";
+import Products from "components/Products";
+import Admins from "components/Admins";
+import Client from "components/Clients";
+import Payments from "components/Payments";
+import Orders from "components/Orders";
+import Complaints from "components/Complaints";
 
-import Icon from "@mui/material/Icon";
-
-const routes = [
+var routes = [
   {
-    type: "collapse",
-    name: "Dashboard",
-    key: "dashboard",
-    icon: <Icon fontSize="small">dashboard</Icon>,
-    route: "/dashboard",
-    component: <Dashboard />,
+    path: "/index",
+    name: "tableau de bord",
+    icon: "ni ni-tv-2 text-primary",
+    component: <Index />,
+    layout: "/admin",
   },
   {
-    type: "collapse",
-    name: "categories",
-    key: "tables",
-    icon: <Icon fontSize="small">table_view</Icon>,
-    route: "/categories",
-    component: <Category />,
-  },
-  {
-    type: "collapse",
-    name: "Billing",
-    key: "billing",
-    icon: <Icon fontSize="small">receipt_long</Icon>,
-    route: "/billing",
-    component: <Billing />,
-  },
-  {
-    type: "collapse",
-    name: "Notifications",
-    key: "notifications",
-    icon: <Icon fontSize="small">notifications</Icon>,
-    route: "/notifications",
-    component: <Notifications />,
-  },
-  {
-    type: "collapse",
-    name: "Profile",
-    key: "profile",
-    icon: <Icon fontSize="small">person</Icon>,
-    route: "/profile",
+    path: "/user-profile",
+    name: "User Profile",
+    icon: "ni ni-single-02 text-yellow",
     component: <Profile />,
+    layout: "/admin",
   },
   {
-    type: "collapse",
-    name: "Sign In",
-    key: "sign-in",
-    icon: <Icon fontSize="small">login</Icon>,
-    route: "/authentication/sign-in",
-    component: <SignIn />,
+    path: "/admins",
+    name: "Administrateur",
+    icon: "fa-solid fa-users-gear text-blue",
+    component: <Admins />,
+    layout: "/admin",
+  },
+  {
+    path: "/clients",
+    name: "Clients",
+    icon: "fa-solid fa-users text-yellow",
+    component: <Client />,
+    layout: "/admin",
+  },
+  {
+    path: "/categories",
+    name: "Categories",
+    icon: "ni ni-bullet-list-67 text-gray",
+    component: <Category />,
+    layout: "/admin",
+  },
+  {
+    path: "/produits",
+    name: "Produits",
+    icon: "fa-solid fa-layer-group text-green",
+    component: <Products />,
+    layout: "/admin",
+  },
+  {
+    path: "/payments",
+    name: "Paiments",
+    icon: "fa-solid fa-credit-card text-red",
+    component: <Payments />,
+    layout: "/admin",
+  },
+  {
+    path: "/orders",
+    name: "Commandes",
+    icon: "fa fa-shopping-cart text-orange",
+    component: <Orders />,
+    layout: "/admin",
+  },
+  {
+    path: "/complaints",
+    name: "Réclamations",
+    icon: "fa-solid fa-comment-dots text-red",
+    component: <Complaints />,
+    layout: "/admin",
+  },
+  {
+    path: "/login",
+    name: "Login",
+    icon: "ni ni-key-25 text-info",
+    component: <Login />,
+    layout: "/auth",
   },
 ];
-
 export default routes;

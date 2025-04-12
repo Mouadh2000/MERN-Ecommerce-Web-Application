@@ -13,13 +13,13 @@ const paymentSchema = new Schema({
     required: true
   },
   paymentMethod: {
-    type: String,
-    enum: ['Credit Card', 'PayPal', 'Bank Transfer', 'Cash on Delivery'],
-    required: true
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'PaymentMethod',
+    required: true,
   },
   transactionId: {
     type: String,
-    default: ''
+    default: 'txn_1I0Y4J2eZvKYlo2CmfZmd9aR'
   },
   status: {
     type: String,
@@ -29,6 +29,10 @@ const paymentSchema = new Schema({
   amount: {
     type: Number,
     required: true
+  },
+  paymentDate: {
+    type: Date,
+    default: Date.now
   },
   createdAt: {
     type: Date,

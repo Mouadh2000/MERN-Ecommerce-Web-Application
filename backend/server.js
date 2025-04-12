@@ -3,6 +3,7 @@ const path = require('path');
 const cors = require('cors');
 const connectDB = require('./src/config/db');
 const adminRoutes = require('./src/routes/adminRoutes');
+const clientRoutes = require('./src/routes/clientRoutes');
 
 
 const app = express();
@@ -25,6 +26,7 @@ connectDB();
 app.use(express.json());
 
 app.use('/api/admin', adminRoutes);
+app.use('/api/client', clientRoutes);
 
 
 const PORT = process.env.PORT || 5000;

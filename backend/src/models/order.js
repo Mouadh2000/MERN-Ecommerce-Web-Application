@@ -10,21 +10,25 @@ const orderSchema = new Schema({
   payment: {
     type: Schema.Types.ObjectId,
     ref: 'Payment',
-    required: true
+    required: false
   },
   totalAmount: {
     type: Number,
     required: true
   },
-  deliveryAddress: {
-    type: String,
-    required: true
-  },
   orderStatus: {
     type: Schema.Types.ObjectId,
-    ref: 'OrderStatus'
+    ref: 'OrderStatus',
   },
+  orderItems: [{
+    type: Schema.Types.ObjectId,
+    ref: 'OrderItem',
+  }],
   createdAt: {
+    type: Date,
+    default: Date.now
+  },
+  updatedAt: {
     type: Date,
     default: Date.now
   }

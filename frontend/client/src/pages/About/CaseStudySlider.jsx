@@ -29,10 +29,10 @@ const Testimonials = () => {
   });
 
   useEffect(() => {
-    // Update carousel options if needed
+    // Mettre à jour les options du carrousel si nécessaire
     // setCarouselOptions(prevOptions => ({
     //   ...prevOptions,
-    //   // Update options here
+    //   // Mettre à jour les options ici
     // }));
   }, []);
 
@@ -47,9 +47,9 @@ const Testimonials = () => {
               <div className="section-title-left pt-80">
                 <Slide direction="down" delay={0.3}>
                 <h3 className="party">
-                  Hear Out Our
+                  Écoutez nos
                   <br />
-                  Happy Clients!
+                  clients satisfaits !
                 </h3>
                 </Slide>
               </div>
@@ -60,7 +60,7 @@ const Testimonials = () => {
               className="owl-carousel testimonial-one owl-theme owl-loaded owl-drag"
               {...carouselOptions}
             >
-              {/* Testimonial items */}
+              {/* Éléments de témoignage */}
               <div className="testmonail-item">
                 {/* <div class="owl-item"> */}
                 <div className="testmonail-box">
@@ -72,15 +72,15 @@ const Testimonials = () => {
                   </div>
                   <div className="inner-test">
                     <p className="text">
-                      "We are delighted by our association with TheJointApps!
-                      They have been really professional and extremely committed
-                      to the most complicated tasks. We wish them all the very
-                      best!"
+                      "Nous sommes ravis de notre collaboration avec TheJointApps !
+                      Ils ont fait preuve d'un grand professionnalisme et d'un engagement
+                      remarquable même pour les tâches les plus complexes. Nous leur souhaitons
+                      tout le meilleur !"
                     </p>
                   </div>
                   <div className="author-details mt-3">
                     <h6>Rabie Elkheir</h6>
-                    <span>Our Customer </span>
+                    <span>Notre client</span>
                   </div>
                 </div>
                 {/* </div> */}
@@ -97,14 +97,14 @@ const Testimonials = () => {
                   </div>
                   <div className="inner-test">
                     <p className="text">
-                      "TheJointApps has been instrumental in building our web
-                      presence. They put together an amazing website for us -
-                      both aesthetically pleasing and functionally sound."
+                      "TheJointApps a joué un rôle clé dans la construction de notre présence web.
+                      Ils ont créé pour nous un site web incroyable - à la fois esthétiquement plaisant
+                      et fonctionnellement solide."
                     </p>
                   </div>
                   <div className="author-details mt-3">
                     <h6>Sara Wander</h6>
-                    <span>Our Customer</span>
+                    <span>Notre client</span>
                   </div>
                 </div>
                 {/* </div> */}
@@ -120,20 +120,20 @@ const Testimonials = () => {
                   </div>
                   <div className="inner-test">
                     <p className="text">
-                      "TheJointApps team was extremely professional and patient
-                      with us throughout the process of developing our mobile
-                      app. We are delighted to have partnered with them."
+                      "L'équipe de TheJointApps a fait preuve d'un professionnalisme exceptionnel
+                      et a été très patiente avec nous tout au long du processus de développement
+                      de notre application mobile. Nous sommes ravis d'avoir collaboré avec eux."
                     </p>
                   </div>
                   <div className="author-details mt-3">
                     <h6>Nour Eldin</h6>
-                    <span>Our Customer</span>
+                    <span>Notre client</span>
                   </div>
                 </div>
                 {/* </div> */}
               </div>
 
-              {/* Add more testimonial items here */}
+              {/* Ajouter plus d'éléments de témoignage ici */}
             </OwlCarousel>
           </div>
         </div>

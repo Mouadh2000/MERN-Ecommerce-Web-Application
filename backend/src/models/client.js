@@ -35,7 +35,7 @@ const clientSchema = new Schema({
   },
   gender: {
     type: String,
-    enum: ['Male', 'Female'],
+    enum: ['male', 'female'],
     required: true
   },
   address: {
@@ -50,14 +50,6 @@ const clientSchema = new Schema({
     type: Boolean,
     default: false
   },
-  verificationToken: {
-    type: String,
-    default: ''
-  },
-  isVerified: {
-    type: Boolean,
-    default: false
-  }
 });
 
 clientSchema.pre('save', async function (next) {

@@ -24,10 +24,19 @@ class AuthenticateAdmin {
             }
 
             req.admin = admin;
-            next(); 
+            next();
         } catch (error) {
             res.status(403).json({ message: 'Invalid or expired token' });
         }
+    }
+
+    async authorizeAdmin(req, res, next) {
+        await this.authenticate(req, res, async () => {
+            if (!req.admin.is_admin) {
+                return res.status(403).json({ message: 'Privilèges d\'administrateur requis' });
+            }
+            next();
+        });
     }
 }
 

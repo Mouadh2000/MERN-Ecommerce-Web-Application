@@ -9,6 +9,9 @@ const storage = multer.diskStorage({
         if (uploadType === 'product') {
             uploadPath = path.join(__dirname, '../../uploads/products');
         
+        }
+        else if (uploadType === 'ClientImage') {
+            uploadPath = path.join(__dirname, '../../uploads/ClientImages');
         } else {
             return cb(new Error('Invalid upload type'), false);
         }

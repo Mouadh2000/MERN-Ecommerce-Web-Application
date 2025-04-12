@@ -7,14 +7,9 @@ const orderStatusSchema = new Schema({
     ref: 'Order',
     required: true
   },
-  deliveryPerson: {
-    type: Schema.Types.ObjectId,
-    ref: 'Delivery',
-    default: null
-  },
   status: {
     type: String,
-    enum: ['Pending', 'Processing', 'Shipped', 'Out for Delivery', 'Delivered', 'Cancelled'],
+    enum: ['Pending', 'Processing', 'Shipped', 'Cancelled'],
     default: 'Pending'
   },
   updatedAt: {
