@@ -25,8 +25,8 @@ var routes = [
     layout: "/admin",
   },
   {
-    path: "/admins",
-    name: "Administrateur",
+    path: "/agents",
+    name: "Agent Support",
     icon: "fa-solid fa-users-gear text-blue",
     component: <Admins />,
     layout: "/admin",

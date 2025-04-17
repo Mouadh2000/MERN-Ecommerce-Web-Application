@@ -5,19 +5,26 @@ class CategoryController {
   async createCategory(req, res) {
     try {
       const { name, description, status } = req.body;
+      const nameRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ\s\-]+$/;
+      if (!nameRegex.test(name)){
+        return res.status(400).json({
+        success: false,
+        message: 'Le nom de la catégorie ne doit contenir que des lettres',
+        });
+      }
 
       const newCategory = new Category({ name, description, status });
       const savedCategory = await newCategory.save();
 
       return res.status(201).json({
         success: true,
-        message: 'Category created successfully',
+        message: 'Catégorie créée avec succès',
         data: savedCategory,
       });
     } catch (error) {
       return res.status(500).json({
         success: false,
-        message: 'Error creating category',
+        message: 'Erreur lors de la création de la catégorie',
         error: error.message,
       });
     }
@@ -28,13 +35,13 @@ class CategoryController {
       const categories = await Category.find({});
       return res.status(200).json({
         success: true,
-        message: 'Categories fetched successfully',
+        message: 'Catégories récupérées avec succès',
         data: categories,
       });
     } catch (error) {
       return res.status(500).json({
         success: false,
-        message: 'Error fetching categories',
+        message: 'Erreur lors de la récupération des catégories',
         error: error.message,
       });
     }
@@ -47,19 +54,19 @@ class CategoryController {
       if (!category) {
         return res.status(404).json({
           success: false,
-          message: 'Category not found',
+          message: 'Catégorie non trouvée',
         });
       }
 
       return res.status(200).json({
         success: true,
-        message: 'Category fetched successfully',
+        message: 'Catégorie récupérée avec succès',
         data: category,
       });
     } catch (error) {
       return res.status(500).json({
         success: false,
-        message: 'Error fetching category',
+        message: 'Erreur lors de la récupération de la catégorie',
         error: error.message,
       });
     }
@@ -78,19 +85,19 @@ class CategoryController {
       if (!updatedCategory) {
         return res.status(404).json({
           success: false,
-          message: 'Category not found',
+          message: 'Catégorie non trouvée',
         });
       }
 
       return res.status(200).json({
         success: true,
-        message: 'Category updated successfully',
+        message: 'Catégorie mise à jour avec succès',
         data: updatedCategory,
       });
     } catch (error) {
       return res.status(500).json({
         success: false,
-        message: 'Error updating category',
+        message: 'Erreur lors de la mise à jour de la catégorie',
         error: error.message,
       });
     }
@@ -103,19 +110,19 @@ class CategoryController {
       if (!deletedCategory) {
         return res.status(404).json({
           success: false,
-          message: 'Category not found',
+          message: 'Catégorie non trouvée',
         });
       }
 
       return res.status(200).json({
         success: true,
-        message: 'Category deleted successfully',
+        message: 'Catégorie supprimée avec succès',
         data: deletedCategory,
       });
     } catch (error) {
       return res.status(500).json({
         success: false,
-        message: 'Error deleting category',
+        message: 'Erreur lors de la suppression de la catégorie',
         error: error.message,
       });
     }

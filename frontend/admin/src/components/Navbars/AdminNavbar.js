@@ -52,16 +52,13 @@ const AdminNavbar = (props) => {
                 <DropdownMenu className="dropdown-menu-arrow" right>
                   {/* User menu items */}
                   <DropdownItem className="noti-title" header tag="div">
-                    <h6 className="text-overflow m-0">Welcome!</h6>
+                    <h6 className="text-overflow m-0">Bienvenue !</h6>
                   </DropdownItem>
                   <DropdownItem to="/admin/user-profile" tag={Link}>
                     <i className="ni ni-single-02" />
                     <span>Mon Profil                    </span>
                   </DropdownItem>
-                  <DropdownItem to="/admin/settings" tag={Link}>
-                    <i className="ni ni-settings-gear-65" />
-                    <span>Paramètres</span>
-                  </DropdownItem>
+                  
                   <DropdownItem href="#pablo" onClick={(e) => {
                     e.preventDefault();
                     handleLogout();

@@ -5,19 +5,26 @@ class PaymentMethodController {
   async createPaymentMethod(req, res) {
     try {
       const { name, description, isActive } = req.body;
+      const nameRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ\s\-]+$/;
+      if (!nameRegex.test(name)){
+        return res.status(400).json({
+        success: false,
+        message: 'Le nom de la méthode de paiement ne doit contenir que des lettres',
+        });
+      }
 
       const newPaymentMethod = new PaymentMethod({ name, description, isActive });
       const savedPaymentMethod = await newPaymentMethod.save();
 
       return res.status(201).json({
         success: true,
-        message: 'Payment method created successfully',
+        message: 'Méthode de paiement créée avec succès',
         data: savedPaymentMethod,
       });
     } catch (error) {
       return res.status(500).json({
         success: false,
-        message: 'Error creating payment method',
+        message: 'Erreur lors de la création de la méthode de paiement',
         error: error.message,
       });
     }
@@ -28,13 +35,13 @@ class PaymentMethodController {
       const paymentMethods = await PaymentMethod.find({});
       return res.status(200).json({
         success: true,
-        message: 'Payment methods fetched successfully',
+        message: 'Méthodes de paiement récupérées avec succès',
         data: paymentMethods,
       });
     } catch (error) {
       return res.status(500).json({
         success: false,
-        message: 'Error fetching payment methods',
+        message: 'Erreur lors de la récupération des méthodes de paiement',
         error: error.message,
       });
     }
@@ -47,19 +54,19 @@ class PaymentMethodController {
       if (!paymentMethod) {
         return res.status(404).json({
           success: false,
-          message: 'Payment method not found',
+          message: 'Méthode de paiement non trouvée',
         });
       }
 
       return res.status(200).json({
         success: true,
-        message: 'Payment method fetched successfully',
+        message: 'Méthode de paiement récupérée avec succès',
         data: paymentMethod,
       });
     } catch (error) {
       return res.status(500).json({
         success: false,
-        message: 'Error fetching payment method',
+        message: 'Erreur lors de la récupération de la méthode de paiement',
         error: error.message,
       });
     }
@@ -78,19 +85,19 @@ class PaymentMethodController {
       if (!updatedPaymentMethod) {
         return res.status(404).json({
           success: false,
-          message: 'Payment method not found',
+          message: 'Méthode de paiement non trouvée',
         });
       }
 
       return res.status(200).json({
         success: true,
-        message: 'Payment method updated successfully',
+        message: 'Méthode de paiement mise à jour avec succès',
         data: updatedPaymentMethod,
       });
     } catch (error) {
       return res.status(500).json({
         success: false,
-        message: 'Error updating payment method',
+        message: 'Erreur lors de la mise à jour de la méthode de paiement',
         error: error.message,
       });
     }
@@ -103,19 +110,19 @@ class PaymentMethodController {
       if (!deletedPaymentMethod) {
         return res.status(404).json({
           success: false,
-          message: 'Payment method not found',
+          message: 'Méthode de paiement non trouvée',
         });
       }
 
       return res.status(200).json({
         success: true,
-        message: 'Payment method deleted successfully',
+        message: 'Méthode de paiement supprimée avec succès',
         data: deletedPaymentMethod,
       });
     } catch (error) {
       return res.status(500).json({
         success: false,
-        message: 'Error deleting payment method',
+        message: 'Erreur lors de la suppression de la méthode de paiement',
         error: error.message,
       });
     }

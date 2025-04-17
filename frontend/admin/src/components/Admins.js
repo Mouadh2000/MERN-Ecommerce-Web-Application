@@ -89,7 +89,7 @@ const Admins = () => {
           <div className="col">
             <Card className="bg-default shadow">
               <CardHeader className="bg-transparent border-0 d-flex justify-content-between align-items-center">
-                <h3 className="text-white mb-0">Administrateur et Agent Support</h3>
+                <h3 className="text-white mb-0">Agent Support</h3>
                 <Col className="d-flex justify-content-end" xs="auto">
                   <Button color="primary" onClick={openModal}>
                     Ajouter Agent Support
@@ -104,7 +104,6 @@ const Admins = () => {
                     <th scope="col">Nom d'utilisateur</th>
                     <th scope="col">Email</th>
                     <th scope="col">Membre du personnel</th>
-                    <th scope="col">Administrateur</th>
                     <th scope="col">Action</th>
                   </tr>
                 </thead>
@@ -124,14 +123,7 @@ const Admins = () => {
                             {admin.is_staff ? "Oui" : "Non"}
                           </Badge>
                         </td>
-                        <td>
-                          <Badge
-                            color={admin.is_admin ? "success" : "danger"}
-                            className="p-2 fs-5"
-                          >
-                            {admin.is_admin ? "Oui" : "Non"}
-                          </Badge>
-                        </td>
+                        
                         <td>
                           <span
                             style={{ cursor: "pointer", color: "green" }}

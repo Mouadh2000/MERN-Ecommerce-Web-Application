@@ -93,11 +93,6 @@ const Header = () => {
         </Link>
       </li>
       <li>
-        <Link className="dropdown-item" to="/MyAccountSetting">
-        Paramètres
-        </Link>
-      </li>
-      <li>
         <hr className="dropdown-divider" />
       </li>
       <li>

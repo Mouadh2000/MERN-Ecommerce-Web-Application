@@ -51,7 +51,7 @@ class AdminController {
 
   static async getAllAdmins(req, res) {
     try {
-      const admins = await Admin.find({}, '-password');
+      const admins = await Admin.find({is_admin: false }, '-password');
       return res.status(200).json({
         success: true,
         message: 'Liste des administrateurs et agent supports récupérée avec succès',

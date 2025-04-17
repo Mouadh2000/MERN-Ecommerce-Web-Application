@@ -8,10 +8,18 @@ class ProductController {
   async createProduct(req, res) {
     try {
       const { name, description, status, category, price, discount, stock_quantity } = req.body;
+
+      const nameRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ\s\-]+$/;
+      if (!nameRegex.test(name)){
+        return res.status(400).json({
+        success: false,
+        message: 'Le nom du produit ne doit contenir que des lettres',
+        });
+      }
       
       const categoryExists = await Category.findById(category);
       if (!categoryExists) {
-        return res.status(404).json({ success: false, message: 'Category not found' });
+        return res.status(404).json({ success: false, message: 'Catégorie non trouvée' });
       }
       
       const discountedPrice = price - (price * (discount / 100));
@@ -38,11 +46,20 @@ class ProductController {
         await productImage.save();
       }
       
-      return res.status(201).json({ success: true, message: 'Product created successfully', data: savedProduct });
+      return res.status(201).json({ 
+        success: true, 
+        message: 'Produit créé avec succès', 
+        data: savedProduct 
+      });
     } catch (error) {
-      return res.status(500).json({ success: false, message: 'Error creating product', error: error.message });
+      return res.status(500).json({ 
+        success: false, 
+        message: 'Erreur lors de la création du produit', 
+        error: error.message 
+      });
     }
   }
+
   async getAllProducts(req, res) {
     try {
       const products = await Product.find().populate('category');
@@ -57,9 +74,17 @@ class ProductController {
           return { ...product.toObject(), image: base64Image };
         })
       );
-      return res.status(200).json({ success: true, data: productsWithImages });
+      return res.status(200).json({ 
+        success: true, 
+        message: 'Produits récupérés avec succès',
+        data: productsWithImages 
+      });
     } catch (error) {
-      return res.status(500).json({ success: false, message: 'Error fetching products', error: error.message });
+      return res.status(500).json({ 
+        success: false, 
+        message: 'Erreur lors de la récupération des produits', 
+        error: error.message 
+      });
     }
   }
 
@@ -67,7 +92,10 @@ class ProductController {
     try {
       const product = await Product.findById(req.params.id).populate('category');
       if (!product) {
-        return res.status(404).json({ success: false, message: 'Product not found' });
+        return res.status(404).json({ 
+          success: false, 
+          message: 'Produit non trouvé' 
+        });
       }
       
       const productImage = await ProductImage.findOne({ product: product._id });
@@ -77,9 +105,17 @@ class ProductController {
         base64Image = imageBuffer.toString('base64');
       }
       
-      return res.status(200).json({ success: true, data: { ...product.toObject(), image: base64Image } });
+      return res.status(200).json({ 
+        success: true, 
+        message: 'Produit récupéré avec succès',
+        data: { ...product.toObject(), image: base64Image } 
+      });
     } catch (error) {
-      return res.status(500).json({ success: false, message: 'Error fetching product', error: error.message });
+      return res.status(500).json({ 
+        success: false, 
+        message: 'Erreur lors de la récupération du produit', 
+        error: error.message 
+      });
     }
   }
 
@@ -89,13 +125,19 @@ class ProductController {
       
       const product = await Product.findById(req.params.id);
       if (!product) {
-        return res.status(404).json({ success: false, message: 'Product not found' });
+        return res.status(404).json({ 
+          success: false, 
+          message: 'Produit non trouvé' 
+        });
       }
       
       if (category) {
         const categoryExists = await Category.findById(category);
         if (!categoryExists) {
-          return res.status(404).json({ success: false, message: 'Category not found' });
+          return res.status(404).json({ 
+            success: false, 
+            message: 'Catégorie non trouvée' 
+          });
         }
       }
       
@@ -120,9 +162,17 @@ class ProductController {
         );
       }
       
-      return res.status(200).json({ success: true, message: 'Product updated successfully', data: updatedProduct });
+      return res.status(200).json({ 
+        success: true, 
+        message: 'Produit mis à jour avec succès', 
+        data: updatedProduct 
+      });
     } catch (error) {
-      return res.status(500).json({ success: false, message: 'Error updating product', error: error.message });
+      return res.status(500).json({ 
+        success: false, 
+        message: 'Erreur lors de la mise à jour du produit', 
+        error: error.message 
+      });
     }
   }
 
@@ -130,7 +180,10 @@ class ProductController {
     try {
       const deletedProduct = await Product.findByIdAndDelete(req.params.id);
       if (!deletedProduct) {
-        return res.status(404).json({ success: false, message: 'Product not found' });
+        return res.status(404).json({ 
+          success: false, 
+          message: 'Produit non trouvé' 
+        });
       }
       
       const productImages = await ProductImage.find({ product: deletedProduct._id });
@@ -140,9 +193,17 @@ class ProductController {
       
       await ProductImage.deleteMany({ product: deletedProduct._id });
       
-      return res.status(200).json({ success: true, message: 'Product deleted successfully', data: deletedProduct });
+      return res.status(200).json({ 
+        success: true, 
+        message: 'Produit supprimé avec succès', 
+        data: deletedProduct 
+      });
     } catch (error) {
-      return res.status(500).json({ success: false, message: 'Error deleting product', error: error.message });
+      return res.status(500).json({ 
+        success: false, 
+        message: 'Erreur lors de la suppression du produit', 
+        error: error.message 
+      });
     }
   }
 
@@ -150,11 +211,15 @@ class ProductController {
     try {
       const product = await Product.findById(req.params.id);
       if (!product) {
-        return res.status(404).json({ success: false, message: 'Product not found' });
+        return res.status(404).json({ 
+          success: false, 
+          message: 'Produit non trouvé' 
+        });
       }
       
       return res.status(200).json({ 
         success: true, 
+        message: 'Stock du produit vérifié avec succès',
         data: {
           productId: product._id,
           productName: product.name,
@@ -163,7 +228,11 @@ class ProductController {
         }
       });
     } catch (error) {
-      return res.status(500).json({ success: false, message: 'Error checking product stock', error: error.message });
+      return res.status(500).json({ 
+        success: false, 
+        message: 'Erreur lors de la vérification du stock du produit', 
+        error: error.message 
+      });
     }
   }
   
@@ -171,13 +240,12 @@ class ProductController {
     try {
       const { categoryId } = req.params;
   
-      // Find all products in the category
       const products = await Product.find({ category: categoryId }).populate('category');
   
       if (products.length === 0) {
         return res.status(404).json({ 
           success: false, 
-          message: 'No products found in this category',
+          message: 'Aucun produit trouvé dans cette catégorie',
           debug: {
             categoryId: categoryId,
             categoryExists: await Category.exists({ _id: categoryId })
@@ -185,13 +253,10 @@ class ProductController {
         });
       }
   
-      // Process products with images
       const productsWithImages = await Promise.all(
         products.map(async (product) => {
-          // Find all images for the product
           const images = await ProductImage.find({ product: product._id });
           
-          // Get just the first image (or null if none exists)
           let image = null;
           if (images.length > 0) {
             const fullPath = path.join('uploads', 'products', images[0].filename);
@@ -203,21 +268,22 @@ class ProductController {
       
           return {
             ...product.toObject(),
-            image: image, // Single image field instead of array
+            image: image,
           };
         })
       );
   
       return res.status(200).json({
         success: true,
+        message: 'Produits par catégorie récupérés avec succès',
         data: productsWithImages
       });
   
     } catch (error) {
-      console.error('Error in getProductsByCategory:', error);
+      console.error('Erreur dans getProductsByCategory:', error);
       return res.status(500).json({
         success: false,
-        message: 'Error fetching products by category',
+        message: 'Erreur lors de la récupération des produits par catégorie',
         error: error.message,
         debug: {
           params: req.params,
@@ -246,9 +312,17 @@ class ProductController {
         })
       );
 
-      return res.status(200).json({ success: true, data: productsWithImages });
+      return res.status(200).json({ 
+        success: true, 
+        message: 'Meilleurs produits récupérés avec succès',
+        data: productsWithImages 
+      });
     } catch (error) {
-      return res.status(500).json({ success: false, message: 'Error fetching top-rated products', error: error.message });
+      return res.status(500).json({ 
+        success: false, 
+        message: 'Erreur lors de la récupération des meilleurs produits', 
+        error: error.message 
+      });
     }
   }
 }
